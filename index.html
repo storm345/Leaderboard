@@ -75,9 +75,10 @@ input {
     </form>
 	<br>
 	<hr>
-	<h3>Save and restore</h3>
+	<h3>Save, Clear and restore</h3>
 	<br>
-    <button class="btn btn-default" onclick="exportToText();">Export to text</button>&nbsp;<button class="btn btn-default" onclick="clearExportedText();">Clear</button>
+    <button class="btn btn-default" onclick="exportToText();">Export to text</button>&nbsp;<button class="btn btn-default" onclick="clearExportedText();">Hide Exported</button>
+	&nbsp;<button class="btn btn-danger" onclick="resetLeaderboard();">Reset Leaderboard</button>
 	&nbsp;<pre class="hiddenPre"><span id="exportedText"></span></pre>
 	<br>
 	<form id="importFromTextForm"
@@ -260,6 +261,15 @@ function removeTeam(team){
   }
   delete scores[team];
   saveScores();
+}
+
+function resetLeaderboard(){
+  if(!window.confirm("Are you sure? This will clear the entire leaderboard")){
+      return;
+  }
+  scores = {};
+  saveScores();
+  updateLeaderboard();
 }
 
 function addTeamFormSubmit(){
